@@ -18,15 +18,14 @@ export const articleController = {
 
   getArticleById: catchAsync(async (req: Request, res: Response) => {
     const { id } = req.params;
-
-    const articles = articleService.getArticleById(id)
-
-    if (!id) {
-      res.status(404).json({ error: `Article with ID ${id} not found` })
-      return
+  
+    const article = await articleService.getArticleById(id);
+  
+    if (!article) {
+      return res.status(404).json({ error: `Article with ID ${id} not found` });
     }
-    res.status(200).json(articles)
-    return
+    
+    return res.status(200).json(article);
   }),
 
   createArticle: catchAsync(async (req: Request, res: Response) => {
