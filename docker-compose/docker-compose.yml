@@ -1,0 +1,53 @@
+version: '3'
+services:
+  app:
+    # Configuration du service app
+    build:
+      context: /Users/StanMars/Desktop/crazyMeeple-back-end/docker-compose
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
+    networks:
+      default:
+    ports:
+      - mode: ingress
+        target: 3000
+        published: "3001"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /Users/StanMars/Desktop/crazyMeeple-back-end
+        target: /app
+        bind:
+          create_host_path: true
+    # Configuration des dépendances
+    depends_on:
+      - mongo
+  mongo:
+    # Configuration du service mongo
+    image: mongo
+    # Configuration des volumes pour stocker les données mongo
+    volumes:
+      - type: volume
+        source: mongo-data
+        target: /data/db
+      - type: volume
+        source: mongo-config
+        target: /data/configdb
+    # Configuration du réseau pour le service mongo
+    networks:
+      default:
+    # Configuration du port d'écoute mongo
+    ports:
+      - "27017:27017"
+    # Configuration des variables d'environnement pour mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: crazyMeeple
+
+volumes:
+  # Configuration des volumes pour stocker les données mongo
+  mongo-data:
+  mongo-config:
+  app-volume:
