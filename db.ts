@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 mongoose.connect('mongodb://Antho:meepleRun@0.0.0.0:27017/gameData', {
   useNewUrlParser: true,
@@ -6,9 +6,9 @@ mongoose.connect('mongodb://Antho:meepleRun@0.0.0.0:27017/gameData', {
 });
 
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', function () {
-  console.log('Connected to MongoDB!');
+  console.log('Connected to MongoDB!')
 });
 
-module.exports = db;
+module.exports = db
