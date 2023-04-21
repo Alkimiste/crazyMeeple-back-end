@@ -1,0 +1,11 @@
+bash
+Copy code
+# VSCode generated files
+.vscode/
+*.code-workspace
+
+# macOS generated files
+.DS_Store
+
+# Node.js generated files
+node_modules/
