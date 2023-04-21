@@ -1,6 +1,6 @@
 import express from 'express'
 import { articleController } from '../../controllers'
-import validate from '../../middlewares/validate'
+import { validate } from 'express-validation'
 import { getArticleById, createArticle, updateArticleById, deleteArticleById } from '../../validations/article.validation'
 
 
