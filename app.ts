@@ -1,5 +1,5 @@
 import express from 'express'
-import articleRoutes from './src/routes/v1/article.route'
+import articleRoutes from './src/routes/article.route'
 
 const app = express()
 const PORT = 3000
