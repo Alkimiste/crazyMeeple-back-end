@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { sendContactMessage } from '../controllers/contact.controller'
 
-const router = Router();
+const router = Router()
 
 router.post('/', sendContactMessage)
 

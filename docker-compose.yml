@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  app:
+    build: .
+      
+    environment:
+      NODE_ENV: production
+    networks:
+      - test
+    ports:
+      - mode: ingress
+        target: 3000
+        published: "3001"
+        protocol: tcp
+    depends_on:
+      - mongo
+
+  mongo:
+    container_name: mongo-db
+    hostname: mongo-db
+    image: mongo
+    volumes:
+      - type: volume
+        source: mongo-data
+        target: /data/db
+      - type: volume
+        source: mongo-config
+        target: /data/configdb
+    networks:
+      - test
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: gameData
+
+volumes:
+  mongo-data:
+  mongo-config:
+
+networks:
+  test:
+    driver: bridge

@@ -9,3 +9,5 @@ Copy code
 
 # Node.js generated files
 node_modules/
+
+.env
