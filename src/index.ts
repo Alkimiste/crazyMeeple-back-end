@@ -1,6 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
+import './db'
 
 import articleRouter from './routes/article.route'
 
@@ -25,6 +26,9 @@ app.get('/', (req, res) => {
 app.use('/articles', articleRouter)
 
 // start the Express server
-app.listen(port, () => {
-  console.log(`App listening on port ${port}...`)
+db.once('open', function () {
+  console.log('Connected to MongoDB!')
+  app.listen(port, () => {
+    console.log(`App listening on port ${port}...`)
+  });
 });

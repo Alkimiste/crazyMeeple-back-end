@@ -1,21 +1,33 @@
 const mongoose = require('mongoose')
+const config = require('./config.json')
 
-// Connect to the MongoDB database using the connection string
-mongoose.connect('mongodb://admin:password@mongo:27017/gameData', {
+const dbConfig = config.db
+const connectionString = `mongodb://${dbConfig.username}:${dbConfig.password}@${dbConfig.host}:${dbConfig.port}/${dbConfig.name}`
+
+mongoose.connect(connectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-// Get a reference to the connection object
-const db = mongoose.connection;
+const db = mongoose.connection
 
-// Log an error message if there's an issue with the connection
 db.on('error', console.error.bind(console, 'connection error:'))
 
-// Log a message once the connection has been established
-db.once('open', function () {
+db.once('open', function() {
   console.log('Connected to MongoDB!')
-});
+  // Create the admin user
+  db.db.createUser({
+    user: 'admin',
+    pwd: 'password123',
+    roles: [{ role: 'readWrite', db: dbConfig.name }]
+  }, function(err: any, result: any) {
+    if (err) {
+      console.error(err)
+      return
+    }
 
-// Export the connection object for use in other parts of the application
+    console.log('Admin user created')
+  })
+})
+
 module.exports = db
