@@ -1,8 +1,6 @@
 {
   "db": {
-    "username": "admin",
-    "password": "password",
-    "host": "mongo",
+    "host": "mongo-db",
     "port": 27017,
     "name": "gameData"
   }

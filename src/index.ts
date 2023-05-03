@@ -1,9 +1,9 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import './db'
-
 import articleRouter from './routes/article.route'
+import { db } from '../db'
+
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -30,5 +30,5 @@ db.once('open', function () {
   console.log('Connected to MongoDB!')
   app.listen(port, () => {
     console.log(`App listening on port ${port}...`)
-  });
-});
+  })
+})
