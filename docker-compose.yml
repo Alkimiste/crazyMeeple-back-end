@@ -16,8 +16,8 @@ services:
         protocol: tcp
 
   mongo:
-    container_name: mongo-db
-    hostname: mongo-db
+    #container_name: mongo-db
+    #hostname: mongo-db
     image: mongo
     volumes:
       - type: volume

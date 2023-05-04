@@ -3,7 +3,7 @@ const config = require('./config.json')
 
 
 const dbConfig = config.db
-const connectionString = `mongo-db://${dbConfig.username}:${dbConfig.password}@${dbConfig.host}:${dbConfig.port}/${dbConfig.name}`
+const connectionString = `mongodb://${dbConfig.username}:${dbConfig.password}@${dbConfig.host}:${dbConfig.port}/${dbConfig.name}`
 console.log(connectionString)
 mongoose.connect(connectionString, {
   useNewUrlParser: true,
