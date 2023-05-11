@@ -2,7 +2,8 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import articleRouter from './routes/article.route'
-import { db } from '../db'
+import userRouter from './routes/user.route'
+import '../db'
 
 
 const app = express()
@@ -22,9 +23,9 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 });
 
-// define a route handler for the articles routes
+// define a route handler for the articles & users routes 
 app.use('/articles', articleRouter)
-
+app.use('/users',userRouter)
 // start the Express server
 db.once('open', function () {
   console.log('Connected to MongoDB!')

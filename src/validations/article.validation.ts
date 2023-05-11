@@ -1,10 +1,10 @@
-import Joi from 'joi';
+import Joi from 'joi'
 
 export const getArticleById = {
   params: {
     id: Joi.string().required(),
   },
-};
+}
 
 export const createArticle = {
   body: {
@@ -13,7 +13,7 @@ export const createArticle = {
     price: Joi.number().required(),
     image: Joi.string().required(),
   },
-};
+}
 
 export const updateArticleById = {
   params: {
@@ -25,10 +25,10 @@ export const updateArticleById = {
     price: Joi.number().required(),
     image: Joi.string().required(),
   },
-};
+}
 
 export const deleteArticleById = {
   params: {
     id: Joi.string().required(),
   },
-};
+}
