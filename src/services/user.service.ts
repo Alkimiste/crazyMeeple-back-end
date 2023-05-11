@@ -1,5 +1,5 @@
 import { UserModel } from '../models/user.model'
-import bcrypt from 'bcrypt'
+
 
 export const createUser = async (name: string, email: string, password: string) => {
   try {
@@ -9,15 +9,15 @@ export const createUser = async (name: string, email: string, password: string) 
       throw new Error('Cet email est déjà utilisé')
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10)// salt = 10x
+    
 
     // create user
     const newUser = new UserModel({
       name,
       email,
-      password: hashedPassword,
+      password
     })
+    
     const savedUser = await newUser.save()
 
     return savedUser

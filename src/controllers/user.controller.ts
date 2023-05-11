@@ -2,13 +2,16 @@ import { Request, Response } from 'express'
 import { createUser, loginUser, logoutUser } from '../services/user.service'
 import generateAccesToken from '../utils/token';
 import jwt from 'jsonwebtoken'
+import bcrypt from 'bcrypt'
+
 export const createUserController = async (req: Request, res: Response) => {
   try {
     const { name, email, password } = req.body
 
-
+// Hash password
+const hashedPassword = await bcrypt.hash(password, 10)// salt = 10x
     // create user
-    const user = await createUser(name, email, password)
+    const user = await createUser(name, email, hashedPassword)
     
     
 
@@ -27,7 +30,7 @@ export const loginUserController = async (req, res) => {
     
     // login user
     const user = await loginUser(email)
-    const validPwd = await jwt.compare(password, user.password);
+    const validPwd = await jwt.verify(password, user.password);
     console.log(user)
       if (!validPwd) {
         res.status(400).json({
